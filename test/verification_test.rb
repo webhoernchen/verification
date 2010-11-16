@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class VerificationTestController < ActionController::Base
+  use Rack::MethodOverride
+
   verify :only => :guarded_one, :params => "one",
          :add_flash => { :error => 'unguarded' },
          :redirect_to => { :action => "unguarded" }
@@ -32,6 +34,8 @@ class VerificationTestController < ActionController::Base
          :redirect_to => { :action => "unguarded" }
 
   verify :only => :must_be_post, :method => :post, :render => { :status => 405, :text => "Must be post" }, :add_headers => { "Allow" => "POST" }
+
+  verify :only => :must_be_put, :method => :put, :render => { :status => 405, :text => "Must be put" }, :add_headers => { "Allow" => "PUT" }
 
   verify :only => :guarded_one_for_named_route_test, :params => "one",
          :redirect_to => :foo_url
@@ -91,6 +95,10 @@ class VerificationTestController < ActionController::Base
 
   def must_be_post
     render :text => "Was a post!"
+  end
+
+  def must_be_put
+    render :text => "Was a put!"
   end
 
   def guarded_with_back
@@ -250,6 +258,16 @@ class VerificationTest < ActionController::TestCase
   def test_guarded_post_and_calls_render_succeeds
     post :must_be_post
     assert_equal "Was a post!", @response.body
+  end
+
+  def test_guarded_put_and_calls_render_succeeds
+    put :must_be_put
+    assert_equal "Was a put!", @response.body
+  end
+
+  def test_guarded_post_with_put_params_and_calls_render_succeeds
+    post :must_be_put, '_method' => 'put'
+    assert_equal "Was a put!", @response.body
   end
 
   def test_default_failure_should_be_a_bad_request
