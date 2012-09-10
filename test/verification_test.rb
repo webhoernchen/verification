@@ -74,11 +74,11 @@ class VerificationTestController < ActionController::Base
   end
 
   def guarded_by_xhr
-    render :text => "#{request.xhr?}"
+    render :text => "#{!!request.xhr?}"
   end
 
   def guarded_by_not_xhr
-    render :text => "#{request.xhr?}"
+    render :text => "#{!!request.xhr?}"
   end
 
   def unguarded
