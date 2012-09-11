@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class VerificationTestController < ActionController::Base
-  use Rack::MethodOverride
-
   verify :only => :guarded_one, :params => "one",
          :add_flash => { :error => 'unguarded' },
          :redirect_to => { :action => "unguarded" }
@@ -265,11 +263,6 @@ class VerificationTest < ActionController::TestCase
     assert_equal "Was a put!", @response.body
   end
 
-  def test_guarded_post_with_put_params_and_calls_render_succeeds
-    post :must_be_put, '_method' => 'put'
-    assert_equal "Was a put!", @response.body
-  end
-
   def test_default_failure_should_be_a_bad_request
     post :no_default_action
     assert_response :bad_request
@@ -288,9 +281,9 @@ class VerificationTest < ActionController::TestCase
 
   def test_guarded_http_method_respects_overwritten_request_method
     # Overwrite http method on application level like Rails supports via sending a _method parameter
-    @request.stubs(:request_method).returns('POST')
+    @request.stubs(:request_method_symbol).returns(:put)
 
-    put :must_be_post
-    assert_equal "Was a post!", @response.body
+    post :must_be_put
+    assert_equal "Was a put!", @response.body
   end
 end
