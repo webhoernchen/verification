@@ -20,7 +20,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('rake')
   s.add_development_dependency('test-unit')
-  s.add_development_dependency('activesupport')
-  s.add_development_dependency('actionpack')
   s.add_development_dependency('mocha', "0.12.9")
 end
