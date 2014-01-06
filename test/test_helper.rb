@@ -4,6 +4,10 @@ require 'mocha/setup'
 require 'active_support'
 require 'action_controller'
 
+if ActiveSupport::VERSION::MAJOR > 3
+  require 'active_support/testing/autorun'
+end
+
 require File.dirname(__FILE__) + '/../lib/action_controller/verification'
 
 SharedTestRoutes = ActionDispatch::Routing::RouteSet.new
