@@ -1,8 +1,8 @@
 require 'bundler/setup'
 require 'test/unit'
+require 'mocha/setup'
 require 'active_support'
 require 'action_controller'
-require 'mocha'
 
 require File.dirname(__FILE__) + '/../lib/action_controller/verification'
 

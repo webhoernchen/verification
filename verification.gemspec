@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.add_dependency('actionpack', '>= 3.0.0', '< 5.0')
 
   s.add_development_dependency('rake')
-  s.add_development_dependency('test-unit')
-  s.add_development_dependency('mocha', "0.12.9")
+  s.add_development_dependency('test-unit', '~> 2.5.5')
+  s.add_development_dependency('mocha', "1.0.0.alpha")
 end
