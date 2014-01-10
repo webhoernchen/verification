@@ -131,8 +131,8 @@ class VerificationTest < ActionController::TestCase
     assert_not_deprecated do
       with_routing do |set|
         set.draw do
-          match 'foo', :to => 'test#foo', :as => :foo
-          match 'verification_test/:action', :to => ::VerificationTestController
+          get 'foo', :to => 'test#foo', :as => :foo
+          get 'verification_test/:action', :controller => 'verification_test'
         end
         get :guarded_one_for_named_route_test, :two => "not one"
         assert_redirected_to '/foo'
