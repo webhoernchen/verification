@@ -2,9 +2,13 @@ language: ruby
 rvm:
   - 1.9.3
   - 2.0.0
-  - 2.1.0
+  - 2.1.7
+  - 2.2.3
 gemfile:
-  - Gemfile
-  - gemfiles/Gemfile.rails3-2
-  - gemfiles/Gemfile.rails4-0
+  - gemfiles/rails_3_0.gemfile
+  - gemfiles/rails_3_1.gemfile
+  - gemfiles/rails_3_2.gemfile
+  - gemfiles/rails_4_0.gemfile
+  - gemfiles/rails_4_1.gemfile
+  - gemfiles/rails_4_2.gemfile
 script: bundle exec rake test
