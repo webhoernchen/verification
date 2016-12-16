@@ -83,6 +83,17 @@ module ActionController #:nodoc:
           verify_action options
         end
       end
+
+      private
+      # fix DEPRECATION WARNING:
+      # before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead
+      def before_filter_or_before_action_for_options(options, &block)
+        if respond_to? :before_action
+          before_action options, &block
+        else
+          before_filter options, &block
+        end
+      end
     end
 
   private
