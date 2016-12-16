@@ -3,3 +3,6 @@ pkg/*
 *.gem
 .bundle
 gemfiles/*.lock
+
+*.un~
+*.swp
